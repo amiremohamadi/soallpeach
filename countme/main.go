@@ -13,10 +13,8 @@ func main() {
 	e := echo.New()
 	e.POST("/", func(c echo.Context) error {
 		body, _ := ioutil.ReadAll(c.Request().Body)
-		in, err := strconv.Atoi(string(body[:len(body)-1]))
-		if err == nil {
-			numberOfReqs += in
-		}
+		in, _ := strconv.Atoi(string(body[:len(body)-1]))
+		numberOfReqs += in
 		return c.String(http.StatusOK, strconv.Itoa(numberOfReqs))
 	})
 	e.GET("/count", func(c echo.Context) error {
