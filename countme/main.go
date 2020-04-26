@@ -13,7 +13,7 @@ func main() {
 	e := echo.New()
 	e.POST("/", func(c echo.Context) error {
 		body, _ := ioutil.ReadAll(c.Request().Body)
-		in, err := strconv.Atoi(string(body))
+		in, err := strconv.Atoi(string(body[:len(body)-1]))
 		if err == nil {
 			numberOfReqs += in
 		}
