@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/labstack/echo"
 	"io/ioutil"
-	"net/http"
 	"strconv"
 )
 
@@ -15,10 +14,10 @@ func main() {
 		body, _ := ioutil.ReadAll(c.Request().Body)
 		in, _ := strconv.Atoi(string(body))
 		numberOfReqs += in
-		return c.NoContent(http.StatusOK)
+		return c.NoContent(200)
 	})
 	e.GET("/count", func(c echo.Context) error {
-		return c.String(http.StatusOK, strconv.Itoa(numberOfReqs))
+		return c.String(200, strconv.Itoa(numberOfReqs))
 	})
 
 	_ = e.Start(":80")
